@@ -1,1 +1,1 @@
-# Lab to exercise for OCP Java 8 certification
+# Java 8 classes to train the content for OCP exam
