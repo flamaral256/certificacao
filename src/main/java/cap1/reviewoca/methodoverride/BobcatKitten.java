@@ -38,10 +38,10 @@ public class BobcatKitten extends Bobcat {
   //public Collection<Integer> findDenAsList() throws IOException { System.out.println("overrided!"); return new ArrayList<Integer>(); }
 
   public static void main(String[] args) {
-	try {
+    try {
       Bobcat bobcat = new BobcatKitten();
-	  bobcat.findDen();
-	  bobcat.findDenAsList();
-	} catch (Exception e) {}
+      bobcat.findDen();
+      bobcat.findDenAsList();
+  } catch (Exception e) {}
   }
 }
