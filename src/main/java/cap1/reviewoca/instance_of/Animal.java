@@ -1,4 +1,4 @@
-package cap1.instance_of;
+package cap1.reviewoca.instance_of;
 
 public class Animal {
 
