@@ -14,12 +14,13 @@ public class TestLocalInnerClass {
     //if(true) y = 7; else y = 0; //ok, y is defined only once in each branch of the if
     //y = 5; //nok because y was already defined, so it is not final
     class Calculator {
-      private void multiply() {
+      private Calculator multiply() { //you can return void or the same local inner class
         System.out.println(x * y);
+        return this;
       }
     }
     //y = 5; //nok because y was already defined, so it is not final (even after class declare)
-    new Calculator().multiply();
+    new Calculator().multiply().multiply();
   }
 
   public static void main(String[] args) {
