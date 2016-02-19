@@ -36,8 +36,8 @@ class Car {
 }
 
 class Webmotors {
-  public void showAvailableCars(Car car, CarMatch matcher) {
-    if(matcher.match(car))
+  public void showAvailableCars(Car car, Predicate<Car> matcher) {
+    if(matcher.test(car))
       System.out.println(car);
   }
 }
