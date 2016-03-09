@@ -7,6 +7,9 @@ public class TestGenerics {
     System.out.println(glassJuice.getLiquid());
     //System.out.println(glassJuice.getLiquidTaste(new Water())); // water has no taste
     System.out.println(glassJuice.getLiquidTaste(new Juice()));
+
+    GlassOnlyOfFruitJuices<OrangeJuice> glassOnlyOrangeJuice = new GlassOnlyOfFruitJuices<>(); //ok orange implements fruit
+    //GlassOnlyOfFruitJuices<AppleJuice> glassOnlyAppleJuice = new GlassOnlyOfFruitJuices<>(); //nok apple does not implement fruit
   }
 }
 
@@ -42,4 +45,12 @@ class Glass<T extends Liquid> {
   public <U extends Juice> String getLiquidTaste(U juice) {
     return juice.taste();
   }
+}
+
+interface Fruit {}
+class OrangeJuice extends Juice implements Fruit {}
+class AppleJuice extends Juice {}
+
+// when using multiple type parameters you must put the concrete types first
+class GlassOnlyOfFruitJuices<T extends Juice & Fruit> {
 }
