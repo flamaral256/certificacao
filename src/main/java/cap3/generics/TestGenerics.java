@@ -2,25 +2,44 @@ package cap3.generics;
 
 public class TestGenerics {
 	public static void main(String[] args) {
-    Glass<Juice> glass = new Glass<>(new Juice());
-    System.out.println(glass.getLiquid());
+    Glass<Juice> glassJuice = new Glass<>(new Juice()); //ok it implements Liquid
+    //Glass<Cake> glassCake = new Glass<>(new Cake()); //nok it does not implement Liquid
+    System.out.println(glassJuice.getLiquid());
+    //System.out.println(glassJuice.getLiquidTaste(new Water())); // water has no taste
+    System.out.println(glassJuice.getLiquidTaste(new Juice()));
   }
 }
 
-class Juice { @Override public String toString() {return "Juice";} }
-class Water { @Override public String toString() {return "Water";} }
-
-interface Liquid {
+class Juice implements Liquid { 
+  @Override public String toString() {return "Juice";}
+  @Override public String taste() {return "sweet";}
+}
+class Water implements Liquid {
+  @Override public String toString() {return "Water";}
+  @Override public String taste() {return null;} //water has no taste
+}
+class Cake {
+  @Override public String toString() {return "Cake";}
 }
 
-class Glass<T> {
-    private T liquid;
+interface Liquid {
+  String taste();
+}
 
-    Glass(T liquid) {
-      this.liquid = liquid;
-    }
+class Glass<T extends Liquid> {
+  private T liquid;
 
-    T getLiquid() {
-      return liquid;
-    }
+  Glass(T liquid) {
+    this.liquid = liquid;
+  }
+
+  T getLiquid() {
+    return liquid;
+  }
+
+  // this method exemplify the use generics with bounds on method level
+  // why? to protect we get a taste for water for example that has no taste
+  public <U extends Juice> String getLiquidTaste(U juice) {
+    return juice.taste();
+  }
 }
