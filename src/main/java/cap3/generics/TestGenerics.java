@@ -10,6 +10,10 @@ public class TestGenerics {
 
     GlassOnlyOfFruitJuices<OrangeJuice> glassOnlyOrangeJuice = new GlassOnlyOfFruitJuices<>(); //ok orange implements fruit
     //GlassOnlyOfFruitJuices<AppleJuice> glassOnlyAppleJuice = new GlassOnlyOfFruitJuices<>(); //nok apple does not implement fruit
+
+    //Glass<Liquid> glassLiquid = new Glass<Juice>(); //nok cuz both type inheritance from Object here
+    //SuperGlass<Juice> glassPolymorphic = new ChieldGlass<Water>(); //nok cuz the types are different
+    SuperGlass<Juice> glassPolymorphic = new ChieldGlass<Juice>();
   }
 }
 
@@ -53,4 +57,12 @@ class AppleJuice extends Juice {}
 
 // when using multiple type parameters you must put the concrete types first
 class GlassOnlyOfFruitJuices<T extends Juice & Fruit> {
+}
+
+class SuperGlass<T> {
+}
+
+// this assert that both types (super and sub) will receive the same type T
+// allowing the inheritance between this types
+class ChieldGlass<T> extends SuperGlass<T> {
 }
