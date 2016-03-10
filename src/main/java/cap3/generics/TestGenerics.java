@@ -21,6 +21,10 @@ public class TestGenerics {
     Tray tray = new Tray();
     tray.add(new WildGlass<Juice>());
     tray.add(new WildGlass<Cake>());
+
+    tray.addOnlyJuice(new WildGlass<Juice>());//ok
+    tray.addOnlyJuice(new WildGlass<OrangeJuice>()); //ok orangejuice is subtype of juice
+    //tray.addOnlyJuice(new WildGlass<Cake>());//nok cake is not a juice
     tray.showContent();
   }
 }
@@ -79,7 +83,11 @@ class WildGlass<T> {}
 
 class Tray {
   private List<WildGlass<?>> trayContent = new ArrayList<>();
+
   void add(WildGlass<?> glass) {//this tray can have glasses of any kind even cakes
+    trayContent.add(glass);
+  }
+  void addOnlyJuice(WildGlass<? extends Juice> glass) {//this tray can only have glasses of juices
     trayContent.add(glass);
   }
   void showContent() {
