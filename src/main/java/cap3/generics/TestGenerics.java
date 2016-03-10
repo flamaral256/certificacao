@@ -25,7 +25,27 @@ public class TestGenerics {
     tray.addOnlyJuice(new WildGlass<Juice>());//ok
     tray.addOnlyJuice(new WildGlass<OrangeJuice>()); //ok orangejuice is subtype of juice
     //tray.addOnlyJuice(new WildGlass<Cake>());//nok cake is not a juice
+
+    /**
+     * PAY ATENTION HERE: when we set the parameter type with the arguments coke, cokediet etc
+     * we are actually only setting wildclass with the alowed type references for this wildglass
+     */
+    tray.addOnlyCokesWithOutSugar(new WildGlass<Coke>()); //ok coke is super type of cokezero
+    tray.addOnlyCokesWithOutSugar(new WildGlass<CokeDiet>()); //ok cokediet is super type of cokezero
+    tray.addOnlyCokesWithOutSugar(new WildGlass<CokeZero>()); //ok cokezero is the own lower type
+    //tray.addOnlyCokesWithOutSugar(new WildGlass<CokeGreen>()); //nok cokeGreen is not a super type of cokezero
+    //tray.addOnlyCokesWithOutSugar(new WildGlass<CokeXtra>()); //nok cokeXtra is a subtype of cokezero
     tray.showContent();
+
+    /**
+     * PAY ATENTION HERE: But here, we are not "tipando" with the allowed references. We are
+     * actually putting real objects here. Not references.
+     */
+    List<? super CokeZero> listOfCokes = new ArrayList<Coke>(); //<-- look that we can setup the reference coke
+    //listOfCokes.add(new Coke()); //nok. but not all cokes objects are cokezeros
+    //listOfCokes.add(new CokeDiet()); //nok. not all cokediet are cokezeros. even if the future class are not even written
+    listOfCokes.add(new CokeZero()); //ok. cokezero object is allowed
+    listOfCokes.add(new CokeXtra()); //ok. cokextra is also a cokezero. HERE we are adding a object that is a sub type for a lower bound
   }
 }
 
@@ -79,7 +99,15 @@ class SuperGlass<T> {
 class ChieldGlass<T> extends SuperGlass<T> {
 }
 
+//-------------------------------------------------------------
+
 class WildGlass<T> {}
+
+class Coke {}
+class CokeDiet extends Coke {}
+class CokeZero extends CokeDiet {}
+class CokeXtra extends CokeZero {}
+class CokeGreen extends Coke {}
 
 class Tray {
   private List<WildGlass<?>> trayContent = new ArrayList<>();
@@ -90,7 +118,11 @@ class Tray {
   void addOnlyJuice(WildGlass<? extends Juice> glass) {//this tray can only have glasses of juices
     trayContent.add(glass);
   }
+  void addOnlyCokesWithOutSugar(WildGlass<? super CokeZero> glass) {// can only accept cokezero and supertypes of it
+    trayContent.add(glass);
+  }
   void showContent() {
     System.out.println(trayContent);
   }
 }
+//-------------------------------------------------------------
