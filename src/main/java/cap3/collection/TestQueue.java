@@ -6,13 +6,14 @@ import java.util.ArrayDeque;
 
 public class TestQueue {
   public static void main(String[] args) {
-    // Queue add the power to insert objects in a specific order into the collection
+    // Queue add the power to insert objects in a specific order into the collection (front and back).
     // They differ from Lists in the fact of lists may add in whatever index you choose and Queues
     // are more specif. For example, FIFO you always add at the back of queue, LIFO you always add
     // at the front of queue. In fact you can add in front for FIFO and back for LIFO as well when you
     // are working with a Deque, or a priority queue. But even this way you are adding in a specific order.
     // You cant for example add some object in the middle of the queue passing the index of what you want.
     // There is an order here to insert and remove elements of this kind of collection.
+    // In the case of LinkedList that is a List and is also a Queue, you can insert and remove in any order.
 
     // FIFO
     Queue<Integer> queue = new ArrayDeque<>();
