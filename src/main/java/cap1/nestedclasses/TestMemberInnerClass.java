@@ -12,6 +12,7 @@ public class TestMemberInnerClass {
   //may also implements interfaces
   {
     //private static String staticMemberNotAllowed = "You cant do this!"; //compile error
+    private static final String staticFinalMemberAllowed = "Ok it is a final static variable!";
     //private static void staticMethodNotAllowed() {} //compile error
     private String getOuterFieldMember() {return outerFieldMember;}
   }
