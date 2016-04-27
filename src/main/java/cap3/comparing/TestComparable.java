@@ -35,4 +35,21 @@ class Animal implements Comparable<Animal> { //using generics. when not u have t
   public String toString() {
     return "Animal: " + id;
   }
+
+  /**
+   * Realize that when we write a compareTo method
+   * together an equals method we have two logics to
+   * say if an object is equals (comparing return 0
+   * or equals returning true). There is a possibility
+   * of this logics are not be consistent and some collections
+   * actions will be unpredictable when sorting. For avoid this,
+   * u may use the class comparator instaded comparable
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (!(o instanceof Animal))
+      return false;
+    Animal a = (Animal) o;
+    return this.id == a.id;
+  }
 }
