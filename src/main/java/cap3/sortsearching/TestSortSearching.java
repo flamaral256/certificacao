@@ -1,8 +1,10 @@
 package cap3.sortsearching;
 
 import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.TreeSet;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -50,6 +52,14 @@ public class TestSortSearching {
     Collections.sort(naoComparavelList, c);
     System.out.println(naoComparavelList); // 1,3,5
     Collections.binarySearch(naoComparavelList, new ClassNotComparable(3), c); //buscas tb podem passar o criterio de comparacao
+
+    Set<ClassNotComparable> naoComparavelSetSemComparator = new TreeSet<>(); //cria um set que naturalmente jah precisa ordenar os valores
+    try {naoComparavelSetSemComparator.add(new ClassNotComparable(1));}
+    catch(Exception e){} // uma classcastexception soh ocorrera qd adicionar um objeto nao comparavel
+
+    //para resolver esse problema precisamos informar pro treeset como ordenar objetos nao comparaveis
+    Set<ClassNotComparable> naoComparavelSetComComparator = new TreeSet<>(c); 
+    naoComparavelSetComComparator.add(new ClassNotComparable(1)); // agora ok.
   }
 }
 
