@@ -1,5 +1,11 @@
+package cap3.methodref;
+
+import java.util.List;
+
 public class TestMethodRef {
     public static void main(String[] args) {
-        System.out.println("test method ref");
+       // method reference of static methods
+       Consumer<List<Integer>> sortList = Collections::sort;
     }
 }
+
