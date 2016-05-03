@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 public class TestMethodRef {
     public static void main(String[] args) {
@@ -39,5 +40,13 @@ public class TestMethodRef {
        System.out.println(listAsCollection);
        listAsCollection.removeIf(i -> i % 2 == 0); // removeIf receive a predicate as a filter
        System.out.println(listAsCollection);
+
+       // lists also receive a new method to replaceAll elements in a list. the code with the logic of how to update is passed as a lambda
+       listOfIntegers.replaceAll(i -> i * 2); //replaceAll receive a UnaryOperator lambda that receives a type and return a modified value of the same type. In fact the method abstract here is apply that is in Function interface inhereated by UnaryOperator
+       System.out.println(listAsCollection);
+
+       // Also, all iterable object (that implements Iterable) receive a method forEach
+       Iterable<Integer> it = listOfIntegers; //just to enphasize that forEach is in the java.lang.Iterable interface
+       it.forEach(System.out::println); // forEach receive a consumer. in this case we just pass to println. so we write as method ref syntax
     }
 }
