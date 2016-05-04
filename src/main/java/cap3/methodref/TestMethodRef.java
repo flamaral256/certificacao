@@ -48,5 +48,7 @@ public class TestMethodRef {
        // Also, all iterable object (that implements Iterable) receive a method forEach
        Iterable<Integer> it = listOfIntegers; //just to enphasize that forEach is in the java.lang.Iterable interface
        it.forEach(System.out::println); // forEach receive a consumer. in this case we just pass to println. so we write as method ref syntax
+
+       // as variaveis locais utilizadas em lambdas seguem as regras de final e efetivamente final
     }
 }
