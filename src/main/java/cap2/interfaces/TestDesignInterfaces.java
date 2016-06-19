@@ -25,7 +25,8 @@ class Impl implements A, B, C {
 interface A {
   static final String s = "constant";
 
-  static int getSomeInt() {
+  static int getSomeInt() { //now we can write static methods in interfaces,
+  // but because a class can implement multiples interfaces a class can not call this static method.
     return 33;
   }
 
