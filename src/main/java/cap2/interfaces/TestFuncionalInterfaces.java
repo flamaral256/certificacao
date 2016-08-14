@@ -45,5 +45,12 @@ class Webmotors {
 // a method with only one abstract method is a funcional interface
 @FunctionalInterface
 interface CarMatch {
+  static CarMatch of(Car c) { // also now is possible implement static methods
+    return new CarMatch() {
+      public boolean match(Car c) {
+        return false;
+      }
+    };
+  }
   boolean match(Car c);
 }
